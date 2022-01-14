@@ -9,11 +9,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int counter = 0;
+  String? name;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     alram();
+    getName();
+    // getName();
     print("App Started");
   }
 
@@ -24,7 +27,19 @@ class _HomeState extends State<Home> {
     print("SetStated Called");
   }
 
-  void getData() {}
+  Future<String?> setName() async {
+    await Future.delayed(const Duration(seconds: 2), () {
+      name = "Yunesh";
+      // return "Yunesh";
+    });
+    // print("$name");
+  }
+
+  void getName() async {
+    await setName();
+    print("$name");
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
