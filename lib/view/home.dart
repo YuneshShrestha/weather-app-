@@ -12,27 +12,16 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int counter = 0;
-  String? name;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
+
     // alram();
     // getName();
     // getName();
     print("App Started");
-  }
-
-  void getData() async {
-    var response = await http.get(Uri.parse(
-        "https://api.openweathermap.org/data/2.5/weather?q=dharan&appid=fad041a60b51ade32ee3963413d0df89"));
-    Map data = jsonDecode(response.body);
-    Map temp = data["main"];
-    List weather = data["weather"];
-    Map mainWeather = weather[0];
-    print(temp["temp"]);
-    print(mainWeather["main"]);
   }
 
   @override
