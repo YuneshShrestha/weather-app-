@@ -9,9 +9,16 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+  var isLoading = true;
+  String? des;
   void startApp() async {
-    Worker worker = Worker(location: "kathmandu");
+    Worker worker = Worker(location: "kathmanduzzzzzzzzz");
     await worker.getData();
+    setState(() {
+      isLoading = false;
+
+      des = worker.description!;
+    });
     print(worker.description);
   }
 
@@ -28,12 +35,21 @@ class _LoadingState extends State<Loading> {
       //   title: const Text("Loading"),
       // ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, "/home");
-          },
-          child: const Text("Go To Home"),
-        ),
+        child: isLoading
+            ? const CircularProgressIndicator()
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    },
+                    child: const Text("Go To Home"),
+                  ),
+                  Text(des.toString())
+                ],
+              ),
       ),
     );
   }
