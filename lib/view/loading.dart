@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/arguments/weather_arguments.dart';
 import 'package:weather_app/worker/worker.dart';
 
 class Loading extends StatefulWidget {
@@ -10,15 +11,30 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
   var isLoading = true;
-  String? des;
+  String? temperature;
+  String? humidity;
+  String? description;
+  String? airSpeed;
+  String? main;
+
   void startApp() async {
-    Worker worker = Worker(location: "kathmanduzzzzzzzzz");
+    Worker worker = Worker(location: "kathmandu");
     await worker.getData();
     setState(() {
       isLoading = false;
-
-      des = worker.description!;
+      temperature = worker.temperature!;
+      humidity = worker.humidity!;
+      description = worker.description!;
+      airSpeed = worker.airSpeed!;
+      main = worker.main!;
     });
+    Navigator.pushReplacementNamed(context, "/home",
+        arguments: WeatherArguments(
+            temperature: temperature,
+            humidity: humidity,
+            description: description,
+            airSpeed: airSpeed,
+            main: main));
     print(worker.description);
   }
 
@@ -30,27 +46,12 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_const_constructors
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text("Loading"),
       // ),
-      body: Center(
-        child: isLoading
-            ? const CircularProgressIndicator()
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/home");
-                    },
-                    child: const Text("Go To Home"),
-                  ),
-                  Text(des.toString())
-                ],
-              ),
-      ),
+      body: const Center(child: CircularProgressIndicator()),
     );
   }
 }
