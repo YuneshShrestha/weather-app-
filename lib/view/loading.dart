@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_app/arguments/weather_arguments.dart';
 import 'package:weather_app/worker/worker.dart';
 
@@ -10,7 +11,7 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  var isLoading = true;
+  // var isLoading = true;
   String? temperature;
   String? humidity;
   String? description;
@@ -20,21 +21,21 @@ class _LoadingState extends State<Loading> {
   void startApp() async {
     Worker worker = Worker(location: "Dharan");
     await worker.getData();
-    setState(() {
-      isLoading = false;
-      temperature = worker.temperature!;
-      humidity = worker.humidity!;
-      description = worker.description!;
-      airSpeed = worker.airSpeed!;
-      main = worker.main!;
-    });
-    Navigator.pushReplacementNamed(context, "/home",
-        arguments: WeatherArguments(
-            temperature: temperature,
-            humidity: humidity,
-            description: description,
-            airSpeed: airSpeed,
-            main: main));
+
+    temperature = worker.temperature!;
+    humidity = worker.humidity!;
+    description = worker.description!;
+    airSpeed = worker.airSpeed!;
+    main = worker.main!;
+    Future.delayed(
+        const Duration(seconds: 2),
+        () => Navigator.pushReplacementNamed(context, "/home",
+            arguments: WeatherArguments(
+                temperature: temperature,
+                humidity: humidity,
+                description: description,
+                airSpeed: airSpeed,
+                main: main)));
     print(worker.description);
   }
 
@@ -51,7 +52,31 @@ class _LoadingState extends State<Loading> {
       // appBar: AppBar(
       //   title: const Text("Loading"),
       // ),
-      body: const Center(child: CircularProgressIndicator()),
+      backgroundColor: const Color(0xff2D46B9),
+      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Image.asset(
+          'image/weather.png',
+          width: 160.0,
+          height: 100.0,
+        ),
+        const SizedBox(
+          height: 24.0,
+        ),
+        Text(
+          "Weather App",
+          style: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.w400,
+              color: Colors.grey.shade200),
+        ),
+        const SizedBox(
+          height: 48.0,
+        ),
+        SpinKitDualRing(
+          color: Colors.grey.shade400,
+          size: 30.0,
+        )
+      ]),
     );
   }
 }
