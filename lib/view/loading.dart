@@ -18,7 +18,7 @@ class _LoadingState extends State<Loading> {
   String? main;
 
   void startApp() async {
-    Worker worker = Worker(location: "kathmandu");
+    Worker worker = Worker(location: "Dharan");
     await worker.getData();
     setState(() {
       isLoading = false;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Worker {
@@ -27,14 +27,21 @@ class Worker {
       Map mainWeather = weather[0];
       // Air Speed
       Map wind = data['wind'];
+      double getTemperature = tempData['temp'] - 273.15.round(); //deg celcius
+      double preciseGetTemperature =
+          double.parse((getTemperature).toStringAsFixed(2));
+      var getHumidity = tempData['humidity']; // percent
+      var getDescription = mainWeather['description'];
+      var getMain = mainWeather['main'];
+      var getAirSpeed = wind['speed'] * 3.6; //km per hr
 
-      temperature = tempData['temp'].toString();
-      humidity = tempData['humidity'].toString();
-      description = mainWeather['description'];
-      main = mainWeather['main'];
-      airSpeed = wind['speed'].toString();
+      temperature = preciseGetTemperature.toString();
+      humidity = getHumidity.toString();
+      description = getDescription;
+      main = getMain;
+      airSpeed = getAirSpeed.toString();
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
       temperature = "No Data Found";
       humidity = "No Data Found";
       description = "No Data Found";
