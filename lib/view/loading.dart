@@ -17,9 +17,11 @@ class _LoadingState extends State<Loading> {
   String? description;
   String? airSpeed;
   String? main;
+  String? icon;
+  String? location = "Kathmandu";
 
   void startApp() async {
-    Worker worker = Worker(location: "Dharan");
+    Worker worker = Worker(location: location);
     await worker.getData();
 
     temperature = worker.temperature!;
@@ -27,6 +29,7 @@ class _LoadingState extends State<Loading> {
     description = worker.description!;
     airSpeed = worker.airSpeed!;
     main = worker.main!;
+    icon = worker.icon!;
     Future.delayed(
         const Duration(seconds: 2),
         () => Navigator.pushReplacementNamed(context, "/home",
@@ -35,7 +38,9 @@ class _LoadingState extends State<Loading> {
                 humidity: humidity,
                 description: description,
                 airSpeed: airSpeed,
-                main: main)));
+                main: main,
+                icon: icon,
+                location: location)));
     print(worker.description);
   }
 

@@ -10,6 +10,7 @@ class Worker {
   String? description;
   String? airSpeed;
   String? main;
+  String? icon;
   Worker({this.location}) {
     location = location;
     // print("$location");
@@ -29,17 +30,21 @@ class Worker {
       Map wind = data['wind'];
       double getTemperature = tempData['temp'] - 273.15.round(); //deg celcius
       double preciseGetTemperature =
-          double.parse((getTemperature).toStringAsFixed(2));
+          double.parse((getTemperature).toStringAsFixed(1));
       var getHumidity = tempData['humidity']; // percent
       var getDescription = mainWeather['description'];
+      var getIcon = mainWeather['icon'];
       var getMain = mainWeather['main'];
-      var getAirSpeed = wind['speed'] * 3.6; //km per hr
+      double getAirSpeed = wind['speed'] * 3.6; //km per hr
+      double getPreciseAirSpeed =
+          double.parse((getAirSpeed).toStringAsFixed(1));
 
       temperature = preciseGetTemperature.toString();
       humidity = getHumidity.toString();
       description = getDescription;
       main = getMain;
-      airSpeed = getAirSpeed.toString();
+      icon = getIcon;
+      airSpeed = getPreciseAirSpeed.toString();
     } catch (e) {
       // print(e.toString());
       temperature = "No Data Found";

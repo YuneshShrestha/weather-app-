@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/arguments/weather_arguments.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -22,10 +23,11 @@ class _HomeState extends State<Home> {
     final weatherArguments =
         ModalRoute.of(context)!.settings.arguments as WeatherArguments;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: AppBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.blue.shade400,
         ),
       ),
       body: SafeArea(
@@ -34,7 +36,7 @@ class _HomeState extends State<Home> {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Colors.blue.shade400, Colors.blue.shade100],
+              colors: [Colors.blue.shade400, Colors.blue.shade200],
               // stops: [0.1, 0.4],
             ),
           ),
@@ -82,14 +84,40 @@ class _HomeState extends State<Home> {
                   children: [
                     Expanded(
                       child: Container(
-                        height: 60,
+                        height: 70,
                         margin: const EdgeInsets.symmetric(horizontal: 2.0),
                         padding: const EdgeInsets.all(4.0),
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.6),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        child: const Text("Hello World"),
+                        child: Row(
+                          children: [
+                            Image.network(
+                                "http://openweathermap.org/img/wn/${weatherArguments.icon}@2x.png"),
+                            const SizedBox(
+                              width: 20.0,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${weatherArguments.main}",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0),
+                                ),
+                                Text(
+                                  "In ${weatherArguments.location}",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -100,7 +128,7 @@ class _HomeState extends State<Home> {
                   children: [
                     Expanded(
                       child: Container(
-                        height: 300,
+                        height: 260,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 2.0, vertical: 10.0),
                         padding: const EdgeInsets.all(4.0),
@@ -108,7 +136,35 @@ class _HomeState extends State<Home> {
                           color: Colors.white.withOpacity(0.6),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        child: const Text("Hello World"),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [Icon(WeatherIcons.thermometer)],
+                            ),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "${weatherArguments.temperature}",
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 80,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "\u2103",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 30,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -120,28 +176,88 @@ class _HomeState extends State<Home> {
                     children: [
                       Expanded(
                         child: Container(
-                          height: 100,
+                          height: 140,
                           margin: const EdgeInsets.only(left: 2.0, right: 6.0),
                           padding: const EdgeInsets.all(4.0),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.6),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          child: const Text("Hello World"),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: const [
+                                  Icon(WeatherIcons.windy),
+                                ],
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "${weatherArguments.airSpeed}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 30.0,
+                                      ),
+                                    ),
+                                    const Text(
+                                      "km/hr",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20.0,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         child: Container(
-                          height: 100,
-                          margin: const EdgeInsets.only(right: 2.0, left: 6.0),
+                          height: 140,
+                          margin: const EdgeInsets.only(left: 2.0, right: 6.0),
                           padding: const EdgeInsets.all(4.0),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.6),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          child: const Text("Hello World"),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: const [
+                                  Icon(WeatherIcons.humidity),
+                                ],
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "${weatherArguments.humidity}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 30.0,
+                                      ),
+                                    ),
+                                    const Text(
+                                      "%",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20.0,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
