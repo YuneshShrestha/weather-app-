@@ -47,12 +47,12 @@ class Worker {
       airSpeed = getPreciseAirSpeed.toString();
     } catch (e) {
       // print(e.toString());
-      temperature = "No Data Found";
-      humidity = "No Data Found";
+      temperature = "N/A";
+      humidity = "N/A";
       description = "No Data Found";
       main = "No Data Found";
-      airSpeed = "No Data Found";
-      icon = "01d";
+      airSpeed = "N/A";
+      icon = "11d";
     }
   }
 }

@@ -61,9 +61,15 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, "/loading",
-                                arguments:
-                                    CityArgument(city: searchController.text));
+                            if (searchController.text.replaceAll(' ', '') ==
+                                '') {
+                              print('No space');
+                            } else {
+                              Navigator.pushReplacementNamed(
+                                  context, "/loading",
+                                  arguments: CityArgument(
+                                      city: searchController.text));
+                            }
                             // print(searchController.text);
                           },
                           icon: const Icon(
