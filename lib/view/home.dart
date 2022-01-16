@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:weather_app/arguments/city_argument.dart';
 import 'package:weather_app/arguments/weather_arguments.dart';
 import 'package:weather_icons/weather_icons.dart';
 
@@ -14,6 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     List<String> cityName = ["Dharan", "Kathmandu", "Delhi", "London"];
@@ -59,7 +61,10 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            print("Hello");
+                            Navigator.pushNamed(context, "/loading",
+                                arguments:
+                                    CityArgument(city: searchController.text));
+                            // print(searchController.text);
                           },
                           icon: const Icon(
                             Icons.search,
@@ -68,6 +73,7 @@ class _HomeState extends State<Home> {
                         ),
                         Expanded(
                           child: TextField(
+                            controller: searchController,
                             decoration: InputDecoration(
                               hintText: "Search $city",
                               border: InputBorder.none,

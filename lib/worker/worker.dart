@@ -52,6 +52,7 @@ class Worker {
       description = "No Data Found";
       main = "No Data Found";
       airSpeed = "No Data Found";
+      icon = "01d";
     }
   }
 }

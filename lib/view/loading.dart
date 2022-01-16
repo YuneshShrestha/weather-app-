@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:weather_app/arguments/city_argument.dart';
 import 'package:weather_app/arguments/weather_arguments.dart';
 import 'package:weather_app/worker/worker.dart';
 
@@ -18,10 +19,10 @@ class _LoadingState extends State<Loading> {
   String? airSpeed;
   String? main;
   String? icon;
-  String? location = "Kathmandu";
+  String? city = "Dharān";
 
-  void startApp() async {
-    Worker worker = Worker(location: location);
+  void startApp(String city) async {
+    Worker worker = Worker(location: city);
     await worker.getData();
 
     temperature = worker.temperature!;
@@ -40,19 +41,27 @@ class _LoadingState extends State<Loading> {
                 airSpeed: airSpeed,
                 main: main,
                 icon: icon,
-                location: location)));
+                location: city)));
     print(worker.description);
   }
 
   @override
-  void initState() {
-    super.initState();
-    startApp();
-  }
+  // void initState() {
+  //   super.initState();
+  //   startApp();
+  // }
 
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
+    if (ModalRoute.of(context)!.settings.name == '/loading') {
+      final cityArgument =
+          ModalRoute.of(context)!.settings.arguments as CityArgument;
+      if (cityArgument.city.isNotEmpty) {
+        city = cityArgument.city;
+      }
+    }
+    startApp(city!);
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text("Loading"),

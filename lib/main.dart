@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/arguments/city_argument.dart';
 // import 'package:weather_app/binding/controllerBinding.dart';
 import 'package:weather_app/view/home.dart';
 // import 'package:get/get.dart';
@@ -34,7 +35,9 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const Loading(),
         "/home": (context) => const Home(),
-        "/location": (context) => const Location(),
+        "/loading": (context) => const Loading(),
+
+        // "/location": (context) => const Location(),
       },
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
