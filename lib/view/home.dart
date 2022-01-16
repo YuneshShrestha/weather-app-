@@ -21,12 +21,15 @@ class _HomeState extends State<Home> {
     print(city);
     final weatherArguments =
         ModalRoute.of(context)!.settings.arguments as WeatherArguments;
-    return SafeArea(
-      child: Scaffold(
-        // appBar: AppBar(
-        //   title: const Text("Home"),
-        // ),
-        body: Container(
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: Colors.blue,
+        ),
+      ),
+      body: SafeArea(
+        child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
