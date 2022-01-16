@@ -26,40 +26,134 @@ class _HomeState extends State<Home> {
         // appBar: AppBar(
         //   title: const Text("Home"),
         // ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          print("Hello");
-                        },
-                        icon: const Icon(Icons.search),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: "Search $city",
-                            border: InputBorder.none,
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [Colors.blue.shade400, Colors.blue.shade100],
+              // stops: [0.1, 0.4],
+            ),
+          ),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Search Bar
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            print("Hello");
+                          },
+                          icon: const Icon(
+                            Icons.search,
+                            color: Colors.blue,
                           ),
                         ),
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Search $city",
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // Description
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 60,
+                        margin: const EdgeInsets.symmetric(horizontal: 2.0),
+                        padding: const EdgeInsets.all(4.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text("Hello World"),
                       ),
+                    )
+                  ],
+                ),
+
+                // Temperature
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 300,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 2.0, vertical: 10.0),
+                        padding: const EdgeInsets.all(4.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text("Hello World"),
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 100,
+                          margin: const EdgeInsets.only(left: 2.0, right: 6.0),
+                          padding: const EdgeInsets.all(4.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.6),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: const Text("Hello World"),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 100,
+                          margin: const EdgeInsets.only(right: 2.0, left: 6.0),
+                          padding: const EdgeInsets.all(4.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.6),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: const Text("Hello World"),
+                        ),
+                      )
                     ],
                   ),
                 ),
-              ),
-            ],
+
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text("Created By Yunesh Shrestha"),
+                      Text("Data Provided By Openweathermap.org"),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
